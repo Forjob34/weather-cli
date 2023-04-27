@@ -30,6 +30,12 @@ git clone https://github.com/yourusername/weather-cli.git
 npm install
 ```
 
+3. Add your OpenWeather API key:
+
+```bash
+node weather.js -t [YOUR_API_KEY]
+```
+
 ## Usage
 
 To use the Weather CLI App, run the following command:
