@@ -14,12 +14,24 @@ const printHelp = () => {
 		dedent`${chalk.blue("HELP")}
         ${chalk.blue("--------------------------------------")}
         Without params - view default weather;
-        -s [CITY] to view city weather;
         -h for HELP;
+        -s [CITY] for save city;
         -t [API_KEY] for save token;
         ${chalk.blue("--------------------------------------")}
         `
 	);
 };
+const printWeather = (res, icon) => {
+	console.log(
+		dedent`${chalk.magentaBright("Weather")} in ${res.name}
+        ${chalk.magentaBright("--------------------------------------")}
+        ${icon}   ${res.weather[0].description}
+        Temp: ${res.main.temp}, Fells like: ${res.main.feels_like}
+        Humidity: ${res.main.humidity}
+        Wind speed: ${res.wind.speed}
+        ${chalk.magentaBright("--------------------------------------")}
+        `
+	);
+};
 
-export { printError, printSuccess, printHelp };
+export { printError, printSuccess, printHelp, printWeather };
