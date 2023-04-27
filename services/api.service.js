@@ -27,7 +27,6 @@ const getIcon = (icon) => {
 const getWeather = async (city) => {
 	const token =
 		process.env.TOKEN ?? (await getKeyValue(TOKEN_DICTIONARY.token));
-	// const city = process.env.CITY ?? (await getKeyValue(TOKEN_DICTIONARY.city));
 	if (!token) {
 		throw new Error("no token, use -t [API_KEY] to setup");
 	}

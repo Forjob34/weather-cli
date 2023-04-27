@@ -14,30 +14,45 @@ import {
 import { getWeather, getIcon } from "./services/api.service.js";
 
 const saveToken = async (token) => {
-	if (token.lenght == false) {
+	if (!token.length) {
 		printError("No token data");
 		return;
 	}
 	try {
 		await saveKeyValue(TOKEN_DICTIONARY.token, token);
-		printSuccess("Token was saved");
+		const weather = await getWeather("london");
+		if (weather.cod == 200) {
+			printSuccess("Token was saved");
+		}
 	} catch (error) {
-		printError(error.message);
+		if (error?.response?.status == 404) {
+			printError("wrong city");
+		} else if (error?.response?.status == 401) {
+			printError("not valid token");
+		} else {
+			printError(error.message);
+		}
 	}
 };
 const saveCity = async (city) => {
-	if (city.lenght == false) {
+	if (!city.length) {
 		printError("No city data");
 		return;
 	}
 	try {
 		await saveKeyValue(TOKEN_DICTIONARY.city, city);
-		const weather = await getWeather();
+		const weather = await getWeather("london");
 		if (weather.cod == 200) {
 			printSuccess("City was saved");
 		}
 	} catch (error) {
-		printError(error.message);
+		if (error?.response?.status == 404) {
+			printError("wrong city");
+		} else if (error?.response?.status == 401) {
+			printError("not valid token");
+		} else {
+			printError(error.message);
+		}
 	}
 };
 
